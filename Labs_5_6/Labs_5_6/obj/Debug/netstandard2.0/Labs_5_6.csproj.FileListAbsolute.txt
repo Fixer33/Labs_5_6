@@ -18,3 +18,6 @@ F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\L
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\refint\Labs_5_6.dll
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\Labs_5_6.pdb
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\ref\Labs_5_6.dll
+F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\bin\Debug\netstandard2.0\Shared.dll
+F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\bin\Debug\netstandard2.0\Shared.pdb
+F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\Labs_5_6.csproj.CopyComplete

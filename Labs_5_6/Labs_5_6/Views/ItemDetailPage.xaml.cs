@@ -10,6 +10,8 @@ namespace Labs_5_6.Views
         {
             InitializeComponent();
             BindingContext = new ItemDetailViewModel();
+
+            
         }
     }
 }

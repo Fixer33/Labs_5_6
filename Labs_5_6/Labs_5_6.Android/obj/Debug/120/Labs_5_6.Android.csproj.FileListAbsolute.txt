@@ -631,3 +631,5 @@ F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\stam
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\stamp\_GenerateJavaStubs.stamp
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\stamp\_GeneratePackageManagerJava.stamp
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\stamp\_ResolveLibraryProjectImports.stamp
+F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\android\assets\SuperSimpleTcp.dll
+F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\android\assets\Newtonsoft.Json.dll

@@ -7,12 +7,24 @@ namespace Labs_5_6.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {
-        public AboutViewModel()
+        private string _id;
+        private string _name;
+
+        public string Id
         {
-            Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
+            get => _id;
+            set => SetProperty(ref _id, value);
         }
 
-        public ICommand OpenWebCommand { get; }
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
+
+        public AboutViewModel()
+        {
+            Title = "Функциональное меню";
+        }
     }
 }

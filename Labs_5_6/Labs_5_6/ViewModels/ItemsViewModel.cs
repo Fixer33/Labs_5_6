@@ -19,7 +19,7 @@ namespace Labs_5_6.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Browse";
+            Title = "Чаты";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

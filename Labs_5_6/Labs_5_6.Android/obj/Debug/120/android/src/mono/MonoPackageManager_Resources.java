@@ -5,6 +5,8 @@ public class MonoPackageManager_Resources {
 		"Labs_5_6.Android.dll",
 		"FormsViewGroup.dll",
 		"Labs_5_6.dll",
+		"Newtonsoft.Json.dll",
+		"SuperSimpleTcp.dll",
 		"Xamarin.AndroidX.Activity.dll",
 		"Xamarin.AndroidX.Annotation.dll",
 		"Xamarin.AndroidX.Annotation.Experimental.dll",
