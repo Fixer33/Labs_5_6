@@ -12,10 +12,16 @@ namespace Labs_5_6
     {
         public static event Action<ChatData> ChatDataAccepted;
         public static event Action<ChatData> ChatCreated;
+        public static event Action<ChatMessageData> ChatMessageRecieved;
+        public static event Action<int> ChatDeleted;
 
         private static SimpleTcpClient _client;
+
         private static bool _userIdLocked;
         private static Action<bool> _userIdExistsResponse;
+
+        private static bool _userNameReqLock;
+        private static Action<string> _userNameReqResponse;
 
         public static void Initialize(string ip)
         {
@@ -87,6 +93,17 @@ namespace Labs_5_6
             }
         }
 
+        public static void DeleteChat(int chatId)
+        {
+            if (_client.IsConnected)
+            {
+                List<byte> toSend = new List<byte>();
+                toSend.Add((byte)ClientPacket.ChatDelete);
+                toSend.Add(Convert.ToByte(chatId));
+                _client.Send(toSend.ToArray());
+            }
+        }
+
         public static async Task<bool> IsUserIdExists(string id)
         {
             if (_userIdLocked)
@@ -118,10 +135,52 @@ namespace Labs_5_6
             return false;
         }
 
+        public static async Task<string> GetUserName(string id)
+        {
+            if (_userNameReqLock)
+                throw new Exception("RequestAlreadyAwaiting");
+
+            if (_client.IsConnected)
+            {
+                _userNameReqLock = true;
+                string result = "";
+                _userNameReqResponse = (name) =>
+                {
+                    result = name;
+                    _userNameReqLock = false;
+                    _userNameReqResponse = null;
+                };
+
+                List<byte> toSend = new List<byte>();
+                toSend.Add((byte)ClientPacket.UserNameRequest);
+                toSend.AddRange(Encoding.UTF8.GetBytes(id));
+                _client.Send(toSend.ToArray());
+
+                while (_userNameReqLock)
+                {
+                    await Task.Delay(100);
+                }
+                return result;
+            }
+
+            throw new Exception("NOT CONNECTED CLIENT");
+        }
+
+        public static void SendChatMessage(int chatId, string message)
+        {
+            if (_client.IsConnected)
+            {
+                List<byte> toSend = new List<byte>();
+                toSend.Add((byte)ClientPacket.ChatMessageSent);
+                ChatMessageData chatMsg = new ChatMessageData(chatId, App.UserId, message);
+                toSend.AddRange(Encoding.UTF8.GetBytes(chatMsg.Serialize()));
+                _client.Send(toSend.ToArray());
+            }
+        }
+
         private static void DataReceived(object sender, DataReceivedEventArgs e)
         {
             byte[] rawData = e.Data.Array;
-            string from = e.IpPort;
             if (rawData == null || rawData.Length <= 0)
             {
                 Console.WriteLine("Invalid data");
@@ -135,7 +194,7 @@ namespace Labs_5_6
             switch (commType)
             {
                 case ServerPacket.IdExistsResponse:
-                    IdExistsResponse(data, from);
+                    IdExistsResponse(data);
                     break;
                 case ServerPacket.ChatCreated:
                     ChatCreatedResponse(data);
@@ -144,16 +203,19 @@ namespace Labs_5_6
 
                     break;
                 case ServerPacket.ChatDeleted:
-
+                    ChatDeletedHandler(data);
                     break;
                 case ServerPacket.UserNameResponse:
-
+                    UserNameResponse(data);
                     break;
                 case ServerPacket.UserNameChanged:
 
                     break;
                 case ServerPacket.ChatDataNotification:
                     ChatDataAcceptedHandle(data);
+                    break;
+                case ServerPacket.ChatMessageSent:
+                    ChatMessageRecievedHandler(data);
                     break;
                 default:
                     break;
@@ -178,9 +240,14 @@ namespace Labs_5_6
             ChatCreated?.Invoke(chat);
         }
 
-        private static void IdExistsResponse(List<byte> data, string from)
+        private static void IdExistsResponse(List<byte> data)
         {
             _userIdExistsResponse?.Invoke(Convert.ToBoolean(data[0]));
+        }
+
+        private static void UserNameResponse(List<byte> data)
+        {
+            _userNameReqResponse?.Invoke(GetString(data.ToArray()));
         }
 
         private static void ChatDataAcceptedHandle(List<byte> data)
@@ -197,10 +264,23 @@ namespace Labs_5_6
             }
         }
 
+        private static void ChatMessageRecievedHandler(List<byte> data)
+        {
+            string rawData = GetString(data.ToArray());
+            ChatMessageRecieved?.Invoke(ChatMessageData.Deserialize(rawData));
+        }
+
+        private static void ChatDeletedHandler(List<byte> data)
+        {
+            int chatId = Convert.ToInt32(data[0]);
+            ChatDeleted?.Invoke(chatId);
+        }
+
         private static string GetString(byte[] data)
         {
             string res = Encoding.UTF8.GetString(data.ToArray());
             return res.Trim('\0');
         }
+
     }
 }

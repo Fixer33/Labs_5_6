@@ -9,6 +9,9 @@ namespace Server
         public static event Action<string, string> DeviceNameChanged;
         public static event Action<ChatData> ChatCreateRequest;
         public static event Action<string> ChatDataRequested;
+        public static event Action<ChatMessageData> ChatMessageRecieved;
+        public static event Action<string, string> UserNameRequested;
+        public static event Action<int> ChatDeleteRequested;
 
         public static void HandleCommand(byte[] rawData, string from)
         {
@@ -44,6 +47,12 @@ namespace Server
                     break;
                 case ClientPacket.ChatDataRequest:
                     ChatDataRequestedHandler(data, from);
+                    break;
+                case ClientPacket.ChatMessageSent:
+                    ChatMessageRecievedHandler(data, from);
+                    break;
+                case ClientPacket.UserNameRequest:
+                    UserNameRequestHandler(data, from);
                     break;
                 default:
                     break;
@@ -113,12 +122,25 @@ namespace Server
 
         private static void ChatDelete(List<byte> data, string from)
         {
-
+            int chatId = Convert.ToInt32(data[0]);
+            ChatDeleteRequested?.Invoke(chatId);
         }
 
         private static void ChatDataRequestedHandler(List<byte> data, string from)
         {
             ChatDataRequested?.Invoke(from);
+        }
+
+        private static void ChatMessageRecievedHandler(List<byte> data, string from)
+        {
+            string serializedMsg = GetString(data.ToArray());
+            ChatMessageRecieved?.Invoke(ChatMessageData.Deserialize(serializedMsg));
+        }
+
+        private static void UserNameRequestHandler(List<byte> data, string from)
+        {
+            string userId = GetString(data.ToArray());
+            UserNameRequested?.Invoke(from, userId);
         }
     }
 }

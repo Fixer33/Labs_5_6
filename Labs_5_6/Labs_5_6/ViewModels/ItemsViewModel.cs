@@ -1,4 +1,5 @@
 ﻿using Labs_5_6.Models;
+using Labs_5_6.Services;
 using Labs_5_6.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -15,6 +16,7 @@ namespace Labs_5_6.ViewModels
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
+        public Command DeleteItemCommand { get; }
         public Command<Item> ItemTapped { get; }
 
         public ItemsViewModel()
@@ -24,15 +26,24 @@ namespace Labs_5_6.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Item>(OnItemSelected);
+            DeleteItemCommand = new Command<Item>(OnItemDeleted);
 
             AddItemCommand = new Command(OnAddItem);
 
             Network.ChatCreated += Network_ChatCreated;
+            Network.ChatDeleted += Network_ChatDeleted;
+        }
+
+        private async void Network_ChatDeleted(int obj)
+        {
+            await Task.Delay(1000);
+            await ExecuteLoadItemsCommand();
         }
 
         ~ItemsViewModel()
         {
             Network.ChatCreated -= Network_ChatCreated;
+            Network.ChatDeleted -= Network_ChatDeleted;
         }
 
         private async void Network_ChatCreated(Shared.ChatData obj)
@@ -67,6 +78,7 @@ namespace Labs_5_6.ViewModels
         {
             IsBusy = true;
             SelectedItem = null;
+            LoadItemsCommand.Execute(null);
         }
 
         public Item SelectedItem
@@ -91,6 +103,15 @@ namespace Labs_5_6.ViewModels
 
             // This will push the ItemDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+        }
+
+        async void OnItemDeleted(Item item)
+        {
+            if (item == null)
+                return;
+
+            var dataStore = (MockDataStore)DataStore;
+            await dataStore.DeleteItemAsync(item.Id);
         }
     }
 }

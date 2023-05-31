@@ -36,6 +36,7 @@ namespace Shared
         {
             ChatDataSerializable data = new ChatDataSerializable()
             {
+                Id = Id,
                 Members = Members,
                 Name = Name,
             };

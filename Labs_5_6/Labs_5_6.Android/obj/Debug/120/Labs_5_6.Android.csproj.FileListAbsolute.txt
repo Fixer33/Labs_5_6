@@ -637,3 +637,4 @@ F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\bin\Debug\Shared.d
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\bin\Debug\Shared.pdb
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\android\assets\Shared.dll
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\android\assets\Shared.pdb
+F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6.Android\obj\Debug\120\android\src\crc64bc03481ce9a8c3e6\ResizableListViewRenderer.java

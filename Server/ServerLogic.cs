@@ -28,7 +28,50 @@ namespace Server
             CommandService.DeviceIdentified += CommandService_DeviceIdentified;
             CommandService.DeviceNameChanged += CommandService_DeviceNameChanged;
             CommandService.ChatCreateRequest += CommandService_ChatCreateRequest;
-            CommandService.ChatDataRequested += CommandService_ChatDataRequested; ;
+            CommandService.ChatDataRequested += CommandService_ChatDataRequested;
+            CommandService.ChatMessageRecieved += CommandService_ChatMessageRecieved;
+            CommandService.UserNameRequested += CommandService_UserNameRequested;
+            CommandService.ChatDeleteRequested += CommandService_ChatDeleteRequested;
+        }
+
+        private void CommandService_ChatDeleteRequested(int chatId)
+        {
+            var chat = Database.GetAllChats().Where(it => it.Id == chatId).FirstOrDefault();
+            Database.DeleteChat(chatId);
+            foreach (var user in _users)
+            {
+                if (chat.Members.Contains(user.Value.Id))
+                {
+                    CommandSender.SendChatDeleteConfirmation(user.Key, chat.Id);
+                }
+            }
+            Console.WriteLine($"Chat {chat.Name} with id {chatId} deleted");
+        }
+
+        private void CommandService_UserNameRequested(string from, string userId)
+        {
+            CommandSender.SendUserName(from, Database.GetUserName(userId));
+            Console.WriteLine($"Sent name of {userId} to {from}");
+        }
+
+        private void CommandService_ChatMessageRecieved(ChatMessageData obj)
+        {
+            var chats = Database.GetAllChats();
+            for (int i = 0; i < chats.Count; i++)
+            {
+                if (chats[i].Id.Equals(obj.ChatId))
+                {
+                    foreach (var user in _users)
+                    {
+                        if (chats[i].Members.Contains(user.Value.Id))
+                        {
+                            CommandSender.SendChatMessage(user.Key, obj);
+                            Console.WriteLine($"Sent chat {obj.ChatId} message to user {user.Value.Id}");
+                        }
+                    }
+                    break;
+                }
+            }
         }
 
         private void CommandService_ChatDataRequested(string from)

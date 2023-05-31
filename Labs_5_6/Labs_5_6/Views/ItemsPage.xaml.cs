@@ -4,6 +4,7 @@ using Labs_5_6.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,18 @@ namespace Labs_5_6.Views
         {
             base.OnAppearing();
             _viewModel.OnAppearing();
+        }
+
+        private void ItemsListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            _viewModel.ItemTapped.Execute(e.Item);
+        }
+
+        private void DeleteChatClicked(object sender, EventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            var item = (Item)menuItem.BindingContext;
+            _viewModel.DeleteItemCommand.Execute(item);
         }
     }
 }

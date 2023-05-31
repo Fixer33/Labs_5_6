@@ -40,5 +40,31 @@ namespace Server
             dataToSendList.AddRange(Encoding.UTF8.GetBytes(dataToSend));
             _server.Send(toIp, dataToSendList.ToArray());
         }
+
+        public static void SendChatDeleteConfirmation(string toIp, int chatId)
+        {
+            List<byte> dataToSendList = new List<byte>();
+            dataToSendList.Add((byte)ServerPacket.ChatDeleted);
+            dataToSendList.Add(Convert.ToByte(chatId));
+            _server.Send(toIp, dataToSendList.ToArray());
+        }
+
+        public static void SendChatMessage(string toIp, ChatMessageData message)
+        {
+            string dataToSend = message.Serialize();
+
+            List<byte> dataToSendList = new List<byte>();
+            dataToSendList.Add((byte)ServerPacket.ChatMessageSent);
+            dataToSendList.AddRange(Encoding.UTF8.GetBytes(dataToSend));
+            _server.Send(toIp, dataToSendList.ToArray());
+        }
+
+        public static void SendUserName(string toIp, string name)
+        {
+            List<byte> dataToSendList = new List<byte>();
+            dataToSendList.Add((byte)ServerPacket.UserNameResponse);
+            dataToSendList.AddRange(Encoding.UTF8.GetBytes(name));
+            _server.Send(toIp, dataToSendList.ToArray());
+        }
     }
 }

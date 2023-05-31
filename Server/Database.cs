@@ -99,6 +99,23 @@ namespace Server
             return false;
         }
 
+        public static string GetUserName(string id)
+        {
+            SQLiteDataReader dataReader;
+            SQLiteCommand comm;
+            comm = _connection.CreateCommand();
+
+            comm.CommandText = $"select * from Users where id == '{id}';";
+
+            dataReader = comm.ExecuteReader();
+            if (dataReader.Read())
+            {
+                return dataReader.GetString(1);
+            }
+
+            return "NOT EXISTS";
+        }
+
         public static int GetFreeChatId()
         {
             SQLiteDataReader dataReader;
@@ -108,7 +125,7 @@ namespace Server
             comm.CommandText = "select max(id) from Chats;";
 
             dataReader = comm.ExecuteReader();
-            while (dataReader.Read())
+            if (dataReader.Read())
             {
                 return dataReader.GetInt32(0) + 1;
             }
@@ -140,6 +157,34 @@ namespace Server
             }
 
             return result;
+        }
+
+        public static List<ChatData> GetAllChats()
+        {
+            SQLiteDataReader dataReader;
+            SQLiteCommand comm;
+            comm = _connection.CreateCommand();
+
+            comm.CommandText = $@"SELECT * from Chats;";
+
+            List<ChatData> result = new List<ChatData>();
+            dataReader = comm.ExecuteReader();
+            while (dataReader.Read())
+            {
+                var chatRec = ChatData.Deserialize(dataReader.GetString(1));
+                if (chatRec != null)
+                    result.Add(chatRec);
+            }
+
+            return result;
+        }
+
+        public static void DeleteChat(int chatId)
+        {
+            SQLiteCommand comm;
+            comm = _connection.CreateCommand();
+            comm.CommandText = $"delete from chats where id == {chatId};";
+            comm.ExecuteNonQuery();
         }
 
         public static void Close()

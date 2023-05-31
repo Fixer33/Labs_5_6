@@ -12,20 +12,38 @@ namespace Labs_5_6.Services
     {
         private static readonly string CACHE_CHATS_PATH = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ChatCache");
 
+        public event Action<int> ChatMessagesUpdated;
+
         readonly List<Item> items;
         Dictionary<int, List<(string, string)>> chatMessages;
+        private Dictionary<string, string> userNameCache;
 
         public MockDataStore()
         {
             App.OnAppPaused += App_OnAppPaused;
 
             items = new List<Item>();
+            userNameCache = new Dictionary<string, string>();
             LoadChatHistory();
 
             Network.ChatDataAccepted += Network_ChatDataAccepted;
             Network.ChatCreated += Network_ChatDataAccepted;
+            Network.ChatMessageRecieved += Network_ChatMessageRecieved;
+            Network.ChatDeleted += Network_ChatDeleted;
 
             Network.RequestChatsData();
+        }
+
+        private void Network_ChatDeleted(int id)
+        {
+            var oldItem = items.Where((Item arg) => arg.Id.Equals(id.ToString())).FirstOrDefault();
+            items.Remove(oldItem);
+        }
+
+        private void Network_ChatMessageRecieved(Shared.ChatMessageData obj)
+        {
+            AddChatMessage(obj.ChatId, obj.SenderId, obj.Message);
+            ChatMessagesUpdated?.Invoke(obj.ChatId);
         }
 
         private async void Network_ChatDataAccepted(Shared.ChatData obj)
@@ -40,7 +58,10 @@ namespace Labs_5_6.Services
         ~MockDataStore()
         {
             App.OnAppPaused -= App_OnAppPaused;
+            Network.ChatDataAccepted -= Network_ChatDataAccepted;
             Network.ChatCreated -= Network_ChatDataAccepted;
+            Network.ChatMessageRecieved -= Network_ChatMessageRecieved;
+            Network.ChatDeleted -= Network_ChatDeleted;
         }
 
         private void LoadChatHistory()
@@ -93,6 +114,7 @@ namespace Labs_5_6.Services
                     msg.Senders.Add(message.Item1);
                     msg.Messages.Add(message.Item2);
                 }
+                toSave.Chats.Add(msg);
             }
             File.WriteAllText(CACHE_CHATS_PATH, JsonConvert.SerializeObject(toSave));
         }
@@ -100,6 +122,38 @@ namespace Labs_5_6.Services
         private void App_OnAppPaused()
         {
             SaveChatHistory();
+        }
+
+        public async Task<string> GetUserName(string userId)
+        {
+            if (userNameCache.ContainsKey(userId) == false)
+            {
+                string name = await Network.GetUserName(userId);
+                userNameCache.Add(userId, name);
+            }
+            return userNameCache[userId];
+        }
+
+        public void AddChatMessage(int chatId, string senderId, string message)
+        {
+            if (chatMessages.ContainsKey(chatId))
+            {
+                var msgs = chatMessages[chatId];
+                msgs.Add((senderId, message));
+                chatMessages[chatId] = msgs;
+            }
+        }
+
+        public List<(string senderId, string message)> GetChatMessageHistory(int chatId)
+        {
+            if (chatMessages.ContainsKey(chatId))
+            {
+                return chatMessages[chatId];
+            }
+            else
+            {
+                return new List<(string, string)>();
+            }
         }
 
         public async Task<bool> AddItemAsync(Item item)
@@ -120,8 +174,8 @@ namespace Labs_5_6.Services
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            int chatId = int.Parse(id);
+            Network.DeleteChat(chatId);
 
             return await Task.FromResult(true);
         }

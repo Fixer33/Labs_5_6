@@ -1443,7 +1443,7 @@ application_config:
 
 	.type	.L.autostr.6, @object
 .L.autostr.6:
-	.asciz	"63a93134-c404-43ec-9360-4466fb5721be"
+	.asciz	"be80f4cf-67bd-4f99-b94e-a7dcd01e4d6b"
 	.size	.L.autostr.6, 37
 
 	.type	.L.autostr.7, @object
