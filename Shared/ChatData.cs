@@ -25,6 +25,13 @@ namespace Shared
             Members.AddRange(members);
         }
 
+        public ChatData(int id, ChatData cloneFrom)
+        {
+            Id = id;
+            Name = cloneFrom.Name;
+            Members = cloneFrom.Members;
+        }
+
         public string Serialize()
         {
             ChatDataSerializable data = new ChatDataSerializable()

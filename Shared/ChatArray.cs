@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,6 +19,11 @@ namespace Shared
             }
         }
 
+        private ChatArray()
+        {
+            SerializedChats = new List<string>();
+        }
+
         public List<ChatData> GetChats()
         {
             List<ChatData> res = new List<ChatData>();
@@ -26,6 +32,37 @@ namespace Shared
                 res.Add(ChatData.Deserialize(SerializedChats[i]));
             }
             return res;
+        }
+
+        public string Serialize()
+        {
+            SerializedChatArrayData toSave = new SerializedChatArrayData();
+            toSave.SerializedChats = SerializedChats.ToArray();
+            return JsonConvert.SerializeObject(toSave);
+        }
+
+        public static ChatArray Deserialize(string rawData)
+        {
+            SerializedChatArrayData saved;
+            try
+            {
+                saved = JsonConvert.DeserializeObject<SerializedChatArrayData>(rawData);
+            }
+            catch
+            {
+                return null;
+            }
+
+
+            ChatArray res = new ChatArray();
+            res.SerializedChats.AddRange(saved.SerializedChats);
+            return res;
+        }
+
+        [Serializable]
+        public struct SerializedChatArrayData
+        {
+            public string[] SerializedChats;
         }
     }
 }

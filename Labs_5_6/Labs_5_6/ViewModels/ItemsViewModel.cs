@@ -26,6 +26,18 @@ namespace Labs_5_6.ViewModels
             ItemTapped = new Command<Item>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            Network.ChatCreated += Network_ChatCreated;
+        }
+
+        ~ItemsViewModel()
+        {
+            Network.ChatCreated -= Network_ChatCreated;
+        }
+
+        private async void Network_ChatCreated(Shared.ChatData obj)
+        {
+            await ExecuteLoadItemsCommand();
         }
 
         async Task ExecuteLoadItemsCommand()

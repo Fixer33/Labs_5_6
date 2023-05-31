@@ -25,6 +25,12 @@ namespace Labs_5_6.ViewModels
         public AboutViewModel()
         {
             Title = "Функциональное меню";
+            InitStore();
+        }
+
+        private async void InitStore()
+        {
+            await DataStore.GetItemsAsync();
         }
     }
 }

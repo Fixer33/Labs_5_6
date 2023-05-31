@@ -1,6 +1,7 @@
 ﻿using Labs_5_6.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,33 +10,33 @@ namespace Labs_5_6.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
-        private string text;
-        private string description;
+        private string _name;
+        private List<string> _members;
+
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
 
         public NewItemViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
+            _members = new List<string>();
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            return !String.IsNullOrWhiteSpace(Name)
+                && _members != null && _members.Count > 0;
         }
 
-        public string Text
+        public void AddMember(string member)
         {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
-
-        public string Description
-        {
-            get => description;
-            set => SetProperty(ref description, value);
+            _members.Add(member);
         }
 
         public Command SaveCommand { get; }
@@ -45,21 +46,23 @@ namespace Labs_5_6.ViewModels
         {
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
+            _members.Clear();
         }
 
         private async void OnSave()
         {
-            Item newItem = new Item()
+            List<string> members = new List<string>();
+            foreach (string member in _members)
             {
-                Id = Guid.NewGuid().ToString(),
-                Text = Text,
-                Description = Description
-            };
+                members.Add(member);
+            }
+            members.Add(App.UserId);
 
-            await DataStore.AddItemAsync(newItem);
+            Network.CreateChat(Name, members);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
+            _members.Clear();
         }
     }
 }

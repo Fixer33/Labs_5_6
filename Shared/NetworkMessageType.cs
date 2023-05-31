@@ -10,7 +10,9 @@ namespace Shared
         ChatCreated = 1,
         ChatUpdated = 2,
         ChatDeleted = 3,
-
+        UserNameResponse = 4,
+        UserNameChanged = 5,
+        ChatDataNotification = 6,
     }
 
     public enum ClientPacket : byte
@@ -21,5 +23,7 @@ namespace Shared
         ChatCreate = 3,
         ChatUpdate = 4,
         ChatDelete = 5,
+        UserNameRequest = 6,
+        ChatDataRequest = 7,
     }
 }

@@ -14,16 +14,12 @@ namespace Labs_5_6
         private static readonly string USER_NAME_KEY = "used_name".GetHashCode().ToString();
         private static readonly string SERVER_IP_KEY = "server_ip".GetHashCode().ToString();
 
+        public static event Action OnAppPaused;
+
         public static string UserId { get; private set; }
         public static string UserName { get; private set; }
         public static string ServerIp { get; private set; } = "192.168.1.11";
         public static App Instance { get; private set; }
-
-        public static void ChangeName(string newName)
-        {
-
-        }
-
 
         public App()
         {
@@ -68,6 +64,7 @@ namespace Labs_5_6
 
         protected override void OnSleep()
         {
+            OnAppPaused?.Invoke();
         }
 
         protected override void OnResume()

@@ -82,6 +82,66 @@ namespace Server
             comm.ExecuteNonQuery();
         }
 
+        public static bool CheckUserIdExistance(string id)
+        {
+            SQLiteDataReader dataReader;
+            SQLiteCommand comm;
+            comm = _connection.CreateCommand();
+
+            comm.CommandText = $"SELECT COUNT(id) from Users where id == '{id}';";
+
+            dataReader = comm.ExecuteReader();
+            while (dataReader.Read())
+            {
+                return dataReader.GetInt32(0) > 0;
+            }
+
+            return false;
+        }
+
+        public static int GetFreeChatId()
+        {
+            SQLiteDataReader dataReader;
+            SQLiteCommand comm;
+            comm = _connection.CreateCommand();
+
+            comm.CommandText = "select max(id) from Chats;";
+
+            dataReader = comm.ExecuteReader();
+            while (dataReader.Read())
+            {
+                return dataReader.GetInt32(0) + 1;
+            }
+
+            return -1;
+        }
+
+        public static void CreateChat(ChatData chat)
+        {
+            SQLiteCommand comm;
+            comm = _connection.CreateCommand();
+            comm.CommandText = $"insert into Chats values ({chat.Id}, '{chat.Serialize()}');";
+            comm.ExecuteNonQuery();
+        }
+
+        public static List<ChatData> GetUserChats(string userId)
+        {
+            SQLiteDataReader dataReader;
+            SQLiteCommand comm;
+            comm = _connection.CreateCommand();
+
+            comm.CommandText = $@"SELECT * from Chats where serializeddata like '%""{userId}""%';";
+
+            List<ChatData> result = new List<ChatData>();
+            dataReader = comm.ExecuteReader();
+            while (dataReader.Read())
+            {
+                result.Add(ChatData.Deserialize(dataReader.GetString(1)));
+            }
+
+            return result;
+        }
+
         public static void Close()
         {
             _connection.Close();

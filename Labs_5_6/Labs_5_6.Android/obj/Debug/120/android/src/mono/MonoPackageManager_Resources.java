@@ -3,6 +3,7 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "Labs_5_6.Android.dll" comes first in this list. */
 		"Labs_5_6.Android.dll",
+		"Shared.dll",
 		"FormsViewGroup.dll",
 		"Labs_5_6.dll",
 		"Newtonsoft.Json.dll",

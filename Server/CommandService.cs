@@ -7,6 +7,8 @@ namespace Server
     {
         public static event Action<string, string> DeviceIdentified;
         public static event Action<string, string> DeviceNameChanged;
+        public static event Action<ChatData> ChatCreateRequest;
+        public static event Action<string> ChatDataRequested;
 
         public static void HandleCommand(byte[] rawData, string from)
         {
@@ -39,6 +41,9 @@ namespace Server
                     break;
                 case ClientPacket.ChatDelete:
                     ChatDelete(data, from);
+                    break;
+                case ClientPacket.ChatDataRequest:
+                    ChatDataRequestedHandler(data, from);
                     break;
                 default:
                     break;
@@ -74,6 +79,7 @@ namespace Server
             }
             catch
             {
+                Console.WriteLine("Invalid client name change request from " + from);
                 return;
             }
             DeviceNameChanged?.Invoke(from, newName);
@@ -81,12 +87,23 @@ namespace Server
 
         private static void CheckIdExists(List<byte> data, string from)
         {
-
+            string userId = GetString(data.ToArray());
+            CommandSender.SendCheckIdReply(from, Database.CheckUserIdExistance(userId));
         }
 
         private static void ChatCreate(List<byte> data, string from)
         {
+            ChatData chat = null;
+            try
+            {
+                chat = ChatData.Deserialize(GetString(data.ToArray()));
+            }
+            catch
+            {
+                Console.WriteLine("Invalid chat create request! from " + from);
+            }
 
+            ChatCreateRequest?.Invoke(chat);
         }
 
         private static void ChatUpdate(List<byte> data, string from)
@@ -97,6 +114,11 @@ namespace Server
         private static void ChatDelete(List<byte> data, string from)
         {
 
+        }
+
+        private static void ChatDataRequestedHandler(List<byte> data, string from)
+        {
+            ChatDataRequested?.Invoke(from);
         }
     }
 }

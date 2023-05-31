@@ -27,6 +27,47 @@ namespace Server
 
             CommandService.DeviceIdentified += CommandService_DeviceIdentified;
             CommandService.DeviceNameChanged += CommandService_DeviceNameChanged;
+            CommandService.ChatCreateRequest += CommandService_ChatCreateRequest;
+            CommandService.ChatDataRequested += CommandService_ChatDataRequested; ;
+        }
+
+        private void CommandService_ChatDataRequested(string from)
+        {
+            string id = "";
+            foreach (var item in _users)
+            {
+                if (item.Key.Equals(from))
+                {
+                    id = item.Value.Id;
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(id))
+            {
+                Console.WriteLine("Error sending data to "+  from + ". No user with such address!");
+                return;
+            }
+
+            ChatArray chats = new ChatArray(Database.GetUserChats(id));
+            CommandSender.SendChatArray(from, chats);
+            Console.WriteLine($"Sent chat data to {from} containing {chats.SerializedChats.Count} elements");
+        }
+
+        private void CommandService_ChatCreateRequest(ChatData obj)
+        {
+            ChatData correctChat = new ChatData(Database.GetFreeChatId(), obj);
+            Database.CreateChat(correctChat);
+
+            foreach (var item in _users)
+            {
+                if (obj.Members.Contains(item.Value.Id))
+                {
+                    CommandSender.SendChatData(item.Key, correctChat);
+                }
+            }
+
+            Console.WriteLine("Chat created " + correctChat.Name + " with id " + correctChat.Id);
         }
 
         private void CommandService_DeviceNameChanged(string ip, string newName)

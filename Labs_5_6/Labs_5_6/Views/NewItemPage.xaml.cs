@@ -12,10 +12,29 @@ namespace Labs_5_6.Views
     {
         public Item Item { get; set; }
 
+        private NewItemViewModel _model;
+
         public NewItemPage()
         {
             InitializeComponent();
-            BindingContext = new NewItemViewModel();
+            _model = new NewItemViewModel();
+            BindingContext = _model;
+        }
+
+        private async void AddMemberClicked(object sender, EventArgs e)
+        {
+            string id = await DisplayPromptAsync("Добавить пользователя", "Введите Id пользователя, которого хотите добавить");
+            if (string.IsNullOrEmpty(id))
+                return;
+
+            bool userExists = await Network.IsUserIdExists(id);
+            if (userExists)
+            {
+                _model.AddMember(id);
+                if (MemberList.Text.Length > 0)
+                    MemberList.Text += ';';
+                MemberList.Text += id;
+            }
         }
     }
 }
