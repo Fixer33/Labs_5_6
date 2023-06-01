@@ -43,6 +43,9 @@ namespace Labs_5_6.Views
         {
             _isVisible = true;
             _model.Appearing();
+
+            int chatId = int.Parse(_model.ItemId);
+            chatView.OpenChat(chatId);
         }
     }
 }

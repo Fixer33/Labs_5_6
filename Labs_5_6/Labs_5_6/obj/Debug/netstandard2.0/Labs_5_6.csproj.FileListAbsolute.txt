@@ -21,3 +21,4 @@ F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\r
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\bin\Debug\netstandard2.0\Shared.dll
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\bin\Debug\netstandard2.0\Shared.pdb
 F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\Labs_5_6.csproj.CopyComplete
+F:\Development\C# projects\Labs_5_6\Labs_5_6\Labs_5_6\obj\Debug\netstandard2.0\Controls\ChatView.xaml.g.cs

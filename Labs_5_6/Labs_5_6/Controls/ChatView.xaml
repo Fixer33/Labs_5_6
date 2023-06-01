@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+             xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Labs_5_6.Controls.ChatView">
+  <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="0" ItemsSource="{Binding Messages}" x:Name="itemHolder">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" BackgroundColor="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Sender}" TextColor="Red" FontAttributes="Bold" />
+                                <Label Text="{Binding Message}" Grid.Column="1" LineBreakMode="WordWrap" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" Padding="10">
+                <Entry Text="{Binding NewMessage}" Placeholder="Type your message..." HorizontalOptions="FillAndExpand" />
+                <Button Text="Send" Command="{Binding SendMessageCommand}" WidthRequest="80" HorizontalOptions="End" />
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

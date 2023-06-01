@@ -22,6 +22,12 @@ namespace Labs_5_6.Views
             InitializeComponent();
 
             BindingContext = _viewModel = new ItemsViewModel();
+            _viewModel.ItemSelected += ItemSelected;
+        }
+
+        private void ItemSelected(Item obj)
+        {
+            chatView.OpenChat(int.Parse(obj.Id));
         }
 
         protected override void OnAppearing()
@@ -40,6 +46,15 @@ namespace Labs_5_6.Views
             var menuItem = (MenuItem)sender;
             var item = (Item)menuItem.BindingContext;
             _viewModel.DeleteItemCommand.Execute(item);
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            _viewModel.IsPortrait = width < height;
+            grid.ColumnDefinitions[1].Width = width > height ? new GridLength(2, GridUnitType.Star) : new GridLength(0, GridUnitType.Star);
+            chatView.IsVisible = width > height;
         }
     }
 }

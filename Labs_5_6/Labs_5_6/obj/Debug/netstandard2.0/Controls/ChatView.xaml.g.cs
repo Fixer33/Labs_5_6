@@ -8,21 +8,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Labs_5_6.Views.ItemDetailPage.xaml", "Views/ItemDetailPage.xaml", typeof(global::Labs_5_6.Views.ItemDetailPage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Labs_5_6.Controls.ChatView.xaml", "Controls/ChatView.xaml", typeof(global::Labs_5_6.Controls.ChatView))]
 
-namespace Labs_5_6.Views {
+namespace Labs_5_6.Controls {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\ItemDetailPage.xaml")]
-    public partial class ItemDetailPage : global::Xamarin.Forms.ContentPage {
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Controls\\ChatView.xaml")]
+    public partial class ChatView : global::Xamarin.Forms.ContentView {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Labs_5_6.Controls.ChatView chatView;
+        private global::Xamarin.Forms.ListView itemHolder;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ItemDetailPage));
-            chatView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Labs_5_6.Controls.ChatView>(this, "chatView");
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ChatView));
+            itemHolder = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.ListView>(this, "itemHolder");
         }
     }
 }

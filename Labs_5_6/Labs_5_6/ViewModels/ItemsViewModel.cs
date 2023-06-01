@@ -13,6 +13,9 @@ namespace Labs_5_6.ViewModels
     {
         private Item _selectedItem;
 
+        public bool IsPortrait;
+        public event Action<Item> ItemSelected;
+
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
@@ -101,8 +104,15 @@ namespace Labs_5_6.ViewModels
             if (item == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            if (IsPortrait)
+            {
+                // This will push the ItemDetailPage onto the navigation stack
+                await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            }
+            else
+            {
+                ItemSelected?.Invoke(item);
+            }
         }
 
         async void OnItemDeleted(Item item)
