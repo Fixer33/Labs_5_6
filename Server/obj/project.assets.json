@@ -127,7 +127,7 @@
           }
         }
       },
-      "Stub.System.Data.SQLite.Core.NetStandard/1.0.117": {
+      "Stub.System.Data.SQLite.Core.NetStandard/1.0.118": {
         "type": "package",
         "compile": {
           "lib/netstandard2.1/System.Data.SQLite.dll": {}
@@ -218,20 +218,20 @@
           }
         }
       },
-      "System.Data.SQLite/1.0.117": {
+      "System.Data.SQLite/1.0.118": {
         "type": "package",
         "dependencies": {
-          "System.Data.SQLite.Core": "[1.0.117]",
-          "System.Data.SQLite.EF6": "[1.0.117]"
+          "System.Data.SQLite.Core": "[1.0.118]",
+          "System.Data.SQLite.EF6": "[1.0.118]"
         }
       },
-      "System.Data.SQLite.Core/1.0.117": {
+      "System.Data.SQLite.Core/1.0.118": {
         "type": "package",
         "dependencies": {
-          "Stub.System.Data.SQLite.Core.NetStandard": "[1.0.117]"
+          "Stub.System.Data.SQLite.Core.NetStandard": "[1.0.118]"
         }
       },
-      "System.Data.SQLite.EF6/1.0.117": {
+      "System.Data.SQLite.EF6/1.0.118": {
         "type": "package",
         "dependencies": {
           "EntityFramework": "6.4.4"
@@ -678,10 +678,10 @@
         "version.txt"
       ]
     },
-    "Stub.System.Data.SQLite.Core.NetStandard/1.0.117": {
-      "sha512": "x1zzPC/A4MmiKGDLoxLE6O5KLu7Kz7dyzhPQzlqYFTFcXmXAtM7hNNWpGw5yLEz833AnGbd/kxoitXArgR4YyA==",
+    "Stub.System.Data.SQLite.Core.NetStandard/1.0.118": {
+      "sha512": "4TS8IZvDj0ud6utxfXI6zv9Ditk4U9Kt9KqLyAIQGcU3GXp5oGBHgGZifq+APcqRCayuN/MSE8t9ZZmygtU28A==",
       "type": "package",
-      "path": "stub.system.data.sqlite.core.netstandard/1.0.117",
+      "path": "stub.system.data.sqlite.core.netstandard/1.0.118",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -695,7 +695,7 @@
         "runtimes/osx-x64/native/SQLite.Interop.dll",
         "runtimes/win-x64/native/SQLite.Interop.dll",
         "runtimes/win-x86/native/SQLite.Interop.dll",
-        "stub.system.data.sqlite.core.netstandard.1.0.117.nupkg.sha512",
+        "stub.system.data.sqlite.core.netstandard.1.0.118.nupkg.sha512",
         "stub.system.data.sqlite.core.netstandard.nuspec"
       ]
     },
@@ -947,32 +947,32 @@
         "version.txt"
       ]
     },
-    "System.Data.SQLite/1.0.117": {
-      "sha512": "yL8FPHoK9LfP9mPk0FGTJlF8ZiqujKfeyn2lIdE/5LyKDhhyXRNWtOF2dN6+OpBdmO1ZSHaYr8HyOY3a3rZ4sw==",
+    "System.Data.SQLite/1.0.118": {
+      "sha512": "lm+Qc7SxuMNl/HpyAbJhQng+snqUs38jaC+GvKoYm5/w+RCTspvM6aFvdWXn6+yhntJR8FnbPWZ7oi2K4UL2vQ==",
       "type": "package",
-      "path": "system.data.sqlite/1.0.117",
+      "path": "system.data.sqlite/1.0.118",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "system.data.sqlite.1.0.117.nupkg.sha512",
+        "system.data.sqlite.1.0.118.nupkg.sha512",
         "system.data.sqlite.nuspec"
       ]
     },
-    "System.Data.SQLite.Core/1.0.117": {
-      "sha512": "lGfOhA3QQod9XhdWYqLgNgbgq5uZnVG6DtnhDAdPisbLpTTgZBNbeGnp+GWt8C+3EyaqBYTGJWXcxHlHKwo05A==",
+    "System.Data.SQLite.Core/1.0.118": {
+      "sha512": "2V1PsfBeqWlZxF/VtB8lQKPfDBayCU8zD5Xc3Mq7cILOa2ZqpPDSwMP0fTfk1gtGSStSk//DxKiGy6zwCQs7Uw==",
       "type": "package",
-      "path": "system.data.sqlite.core/1.0.117",
+      "path": "system.data.sqlite.core/1.0.118",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "system.data.sqlite.core.1.0.117.nupkg.sha512",
+        "system.data.sqlite.core.1.0.118.nupkg.sha512",
         "system.data.sqlite.core.nuspec"
       ]
     },
-    "System.Data.SQLite.EF6/1.0.117": {
-      "sha512": "Q1y/Jz1K63okYr1Jea7DyNGrOyWJiOpPHdpJ9cbjWAJanKJ0RUAZ8HQHKy9oEdxfjv0kfPR+Up9QcWni8lryCQ==",
+    "System.Data.SQLite.EF6/1.0.118": {
+      "sha512": "6OqO3OA8tej0BidxjYxutfR2HlodiYAA3qU4BtYe/wQdXJ75rumiAr9inYJaxFkwgGb8jW1qyFy953ZFyCOe8A==",
       "type": "package",
-      "path": "system.data.sqlite.ef6/1.0.117",
+      "path": "system.data.sqlite.ef6/1.0.118",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -998,7 +998,7 @@
         "lib/net451/System.Data.SQLite.EF6.dll",
         "lib/net46/System.Data.SQLite.EF6.dll",
         "lib/netstandard2.1/System.Data.SQLite.EF6.dll",
-        "system.data.sqlite.ef6.1.0.117.nupkg.sha512",
+        "system.data.sqlite.ef6.1.0.118.nupkg.sha512",
         "system.data.sqlite.ef6.nuspec",
         "tools/net40/install.ps1",
         "tools/net45/install.ps1",
@@ -1246,9 +1246,10 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Newtonsoft.Json >= 13.0.3",
       "Shared >= 1.0.0",
       "SuperSimpleTcp >= 3.0.10",
-      "System.Data.SQLite >= 1.0.117"
+      "System.Data.SQLite >= 1.0.118"
     ]
   },
   "packageFolders": {
@@ -1258,11 +1259,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Development\\C# projects\\Labs_5_6\\Server\\Server.csproj",
+      "projectUniqueName": "F:\\Development\\C# projects\\LAB_5_6\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "F:\\Development\\C# projects\\Labs_5_6\\Server\\Server.csproj",
+      "projectPath": "F:\\Development\\C# projects\\LAB_5_6\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\aroub\\.nuget\\packages\\",
-      "outputPath": "F:\\Development\\C# projects\\Labs_5_6\\Server\\obj\\",
+      "outputPath": "F:\\Development\\C# projects\\LAB_5_6\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1284,8 +1285,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj": {
-              "projectPath": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj"
+            "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj": {
+              "projectPath": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj"
             }
           }
         }
@@ -1300,13 +1301,17 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.3, )"
+          },
           "SuperSimpleTcp": {
             "target": "Package",
             "version": "[3.0.10, )"
           },
           "System.Data.SQLite": {
             "target": "Package",
-            "version": "[1.0.117, )"
+            "version": "[1.0.118, )"
           }
         },
         "imports": [

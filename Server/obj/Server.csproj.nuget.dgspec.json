@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Development\\C# projects\\Labs_5_6\\Server\\Server.csproj": {}
+    "F:\\Development\\C# projects\\LAB_5_6\\Server\\Server.csproj": {}
   },
   "projects": {
-    "F:\\Development\\C# projects\\Labs_5_6\\Server\\Server.csproj": {
+    "F:\\Development\\C# projects\\LAB_5_6\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Development\\C# projects\\Labs_5_6\\Server\\Server.csproj",
+        "projectUniqueName": "F:\\Development\\C# projects\\LAB_5_6\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "F:\\Development\\C# projects\\Labs_5_6\\Server\\Server.csproj",
+        "projectPath": "F:\\Development\\C# projects\\LAB_5_6\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\aroub\\.nuget\\packages\\",
-        "outputPath": "F:\\Development\\C# projects\\Labs_5_6\\Server\\obj\\",
+        "outputPath": "F:\\Development\\C# projects\\LAB_5_6\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj": {
-                "projectPath": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj"
+              "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj": {
+                "projectPath": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj"
               }
             }
           }
@@ -49,13 +49,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "SuperSimpleTcp": {
               "target": "Package",
               "version": "[3.0.10, )"
             },
             "System.Data.SQLite": {
               "target": "Package",
-              "version": "[1.0.117, )"
+              "version": "[1.0.118, )"
             }
           },
           "imports": [
@@ -77,14 +81,14 @@
         }
       }
     },
-    "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj": {
+    "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj",
+        "projectUniqueName": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj",
         "projectName": "Shared",
-        "projectPath": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj",
+        "projectPath": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj",
         "packagesPath": "C:\\Users\\aroub\\.nuget\\packages\\",
-        "outputPath": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\obj\\",
+        "outputPath": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

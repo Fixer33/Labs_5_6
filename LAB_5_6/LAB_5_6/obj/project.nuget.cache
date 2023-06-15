@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "8hbhl7zT8kuv4Zk4MIHFz9KuYcsRnYNvWv2gs7BfcvUN1aV+g45K31gJ3EFgk66iMoMKdsA5U8Eiw998iFZuzQ==",
+  "success": true,
+  "projectFilePath": "F:\\Development\\C# projects\\LAB_5_6\\LAB_5_6\\LAB_5_6\\LAB_5_6.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\aroub\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\aroub\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\aroub\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\aroub\\.nuget\\packages\\supersimpletcp\\3.0.10\\supersimpletcp.3.0.10.nupkg.sha512",
+    "C:\\Users\\aroub\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\aroub\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\aroub\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}

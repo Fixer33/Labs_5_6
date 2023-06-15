@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LAB_5_6.Views.ItemsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:LAB_5_6.ViewModels"  
+             xmlns:controls="clr-namespace:LAB_5_6.Controls"  
+             xmlns:model="clr-namespace:LAB_5_6.Models"  
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <ListView x:Name="ItemsListView"
+                      ItemsSource="{Binding Items}"
+                      SelectionMode="None"
+                      ItemTapped="ItemsListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete" Clicked="DeleteChatClicked"></MenuItem>
+                            </ViewCell.ContextActions>
+                            <StackLayout Padding="10" x:DataType="model:Item">
+                                <Label Text="{Binding Name}" 
+                                       LineBreakMode="NoWrap" 
+                                       Style="{DynamicResource ListItemTextStyle}" 
+                                       FontSize="16" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </RefreshView>
+
+        <controls:ChatView Grid.Column="1" x:Name="chatView"/>
+    </Grid>
+</ContentPage>

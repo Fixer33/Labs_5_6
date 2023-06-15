@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LAB_5_6.Views.AboutPage"
+             xmlns:vm="clr-namespace:LAB_5_6.ViewModels"
+             Title="Функциональное меню">
+        
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="Лабораторная работа 5, 6" FontSize="Title"/>
+                <Label Text="Вариант 12 - Hello" FontSize="16" Padding="0,0,0,0" Margin="0,0,0,10"/>
+
+                <StackLayout Orientation="Vertical" Spacing="0" BackgroundColor="AliceBlue">
+                    <Label Text="Ваш идентификатор" FontSize="Medium"/>
+                    <Entry Text="{Binding Id}" IsReadOnly="True" FontSize="Medium"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" Spacing="0" BackgroundColor="AliceBlue">
+                    <Label Text="Ваше имя" FontSize="Medium"/>
+                    <Button Text="{Binding Name}" Clicked="NameTapped" TextColor="Black" BackgroundColor="Transparent" FontSize="Medium" />
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

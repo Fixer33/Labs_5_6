@@ -226,11 +226,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj",
+      "projectUniqueName": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj",
       "projectName": "Shared",
-      "projectPath": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\Shared.csproj",
+      "projectPath": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\Shared.csproj",
       "packagesPath": "C:\\Users\\aroub\\.nuget\\packages\\",
-      "outputPath": "F:\\Development\\C# projects\\Labs_5_6\\Shared\\obj\\",
+      "outputPath": "F:\\Development\\C# projects\\LAB_5_6\\Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
